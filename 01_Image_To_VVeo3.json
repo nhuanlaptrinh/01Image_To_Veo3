@@ -1,5 +1,5 @@
 {
-  "name": "01_Prompt_To_VVeo3",
+  "name": "01_Image_To_VVeo3",
   "nodes": [
     {
       "parameters": {
@@ -23,12 +23,12 @@
         "jsonBody": "= {\n  \"endpoint\": \"projects/{{ $('Setting2').first().json.PROJECT_ID }}/locations/{{ $('Setting2').first().json.LOCATION }}/publishers/google/models/{{ $('Setting2').first().json.MODEL_VERSION }}\",\n  \"instances\": [\n    {\n      \"prompt\": \"{{ ($('Setting2').first().json.TEXT_PROMPT || '')\n        .replace(/\\*\\*/g, '')\n        .replace(/\\*/g, '')\n        .replace(/^[\\s-]+/gm, '')\n        .replace(/\"/g, '\\\\\"')\n        .replace(/\\r\\n/g, '\\n')\n        .replace(/\\n+/g, ' ')\n        .replace(/\\s{2,}/g, ' ')\n        .trim()}}\"\n    }\n  ],\n  \"parameters\": {\n    \"aspectRatio\": \"{{ $('Setting2').first().json.ASPECT_RATIO }}\",\n    \"sampleCount\": {{ $('Setting2').first().json.SAMPLE_COUNT }},\n    \"durationSeconds\": \"{{ $('Setting2').first().json.DURATION_SECONDS }}\",\n    \"personGeneration\": \"{{ $('Setting2').first().json.PERSON_GENERATION }}\",\n    \"addWatermark\": {{ $('Setting2').first().json.ADD_WATERMARK }},\n    \"includeRaiReason\": {{ $('Setting2').first().json.INCLUDE_RAI_REASON }},\n    \"generateAudio\": {{ $('Setting2').first().json.GENERATE_AUDIO }}\n  }\n}",
         "options": {}
       },
-      "id": "2e3c0788-9944-4532-9825-3d296f9fb82c",
+      "id": "ef846ad2-34a5-477f-82e5-eda8c3bf1e40",
       "name": "Vertex AI-VEO2",
       "type": "n8n-nodes-base.httpRequest",
       "position": [
-        1792,
-        0
+        1984,
+        416
       ],
       "typeVersion": 4.2
     },
@@ -37,12 +37,12 @@
         "amount": 1,
         "unit": "minutes"
       },
-      "id": "443b2c1b-3dbb-405c-8edf-5b5bd1819fd9",
+      "id": "f8647ee2-1b9b-40ce-bb2b-96b0a3496e01",
       "name": "Wait3",
       "type": "n8n-nodes-base.wait",
       "position": [
-        2016,
-        0
+        2208,
+        416
       ],
       "typeVersion": 1.1,
       "webhookId": "ca4136c0-182a-43e0-b234-079ffe826eea"
@@ -69,12 +69,12 @@
         "jsonBody": "={\n  \"operationName\": \"{{ $json.name }}\"\n}\n",
         "options": {}
       },
-      "id": "0ddd87c4-2d32-4dd1-934f-3a9a7a323d86",
+      "id": "9db5ab92-9acc-40ff-b300-6f0c96d43067",
       "name": "Vertex AI-fetch2",
       "type": "n8n-nodes-base.httpRequest",
       "position": [
-        2240,
-        -80
+        2432,
+        336
       ],
       "typeVersion": 4.2
     },
@@ -105,10 +105,10 @@
       "type": "n8n-nodes-base.if",
       "typeVersion": 2.1,
       "position": [
-        2464,
-        0
+        2656,
+        416
       ],
-      "id": "0c21801f-5c19-4f09-a882-d7fbfdd9b065",
+      "id": "08393e50-f0ed-4536-87fa-bfe0720a9685",
       "name": "Check Video Ready2"
     },
     {
@@ -117,12 +117,12 @@
         "sourceProperty": "response.videos[0].bytesBase64Encoded",
         "options": {}
       },
-      "id": "65e66262-2dc2-42b4-9b2d-c2859a4ccc5f",
+      "id": "f95cf945-827c-4140-a67c-cfcd32d6b1ec",
       "name": "Convert to File2",
       "type": "n8n-nodes-base.convertToFile",
       "position": [
-        2688,
-        0
+        2880,
+        416
       ],
       "typeVersion": 1.1
     },
@@ -138,24 +138,24 @@
         },
         "folderId": {
           "__rl": true,
-          "value": "1AQkQRVHO3QpKYRX0YnUbiEKr9ud5cd21",
+          "value": "YOUR_GOOGLE_DRIVE_FOLDER_ID",
           "mode": "list",
-          "cachedResultName": "Video_Veo3",
-          "cachedResultUrl": "https://drive.google.com/drive/folders/1AQkQRVHO3QpKYRX0YnUbiEKr9ud5cd21"
+          "cachedResultName": "06.Video_Veo3_N8n",
+          "cachedResultUrl": "https://drive.google.com/drive/folders/YOUR_GOOGLE_DRIVE_FOLDER_ID"
         },
         "options": {}
       },
-      "id": "87142036-98d6-476f-9ed7-27d2fd2680f6",
+      "id": "73a87a1a-cf9c-47b5-a1c2-30f8cce0c91f",
       "name": "Upload file2",
       "type": "n8n-nodes-base.googleDrive",
       "position": [
-        2912,
-        0
+        3104,
+        416
       ],
       "typeVersion": 3,
       "credentials": {
         "googleDriveOAuth2Api": {
-          "id": "e2osjsVHgsECOqGE",
+          "id": "YOUR_GOOGLE_DRIVE_CREDENTIAL_ID",
           "name": "Google Drive account 4"
         }
       }
@@ -177,10 +177,10 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.3,
       "position": [
-        1344,
-        0
+        1536,
+        416
       ],
-      "id": "5725e489-89e8-49d7-bc12-fd89d8e8fc00",
+      "id": "f19e34cc-ce87-43c6-b99c-01411b9314da",
       "name": "CheckTimeToken2",
       "onError": "continueErrorOutput"
     },
@@ -215,10 +215,10 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.3,
       "position": [
-        1568,
-        64
+        1760,
+        480
       ],
-      "id": "b32d0bfe-e747-4f4e-b808-858a3f174e31",
+      "id": "212720c0-b971-48f2-94f8-2dbaf0fc2cae",
       "name": "Get RefreshToken2"
     },
     {
@@ -229,7 +229,31 @@
               "id": "5cedc3de-6221-4d7e-a6c8-82f4cb9cf0e9",
               "name": "PROJECT_ID",
               "type": "string",
-              "value": "n8npython-479410"
+              "value": "YOUR_PROJECT_ID"
+            },
+            {
+              "id": "client-id",
+              "name": "CLIENT_ID",
+              "type": "string",
+              "value": "YOUR_CLIENT_ID"
+            },
+            {
+              "id": "client-secret",
+              "name": "CLIENT_SECRET",
+              "type": "string",
+              "value": "YOUR_CLIENT_SECRET"
+            },
+            {
+              "id": "bf0910e1-b757-4852-9341-a7792161f89b",
+              "name": "ACCESS_TOKEN",
+              "type": "string",
+              "value": "YOUR_ACCESS_TOKEN"
+            },
+            {
+              "id": "refresh-token",
+              "name": "REFRESH_TOKEN",
+              "type": "string",
+              "value": "YOUR_REFRESH_TOKEN"
             },
             {
               "id": "90019751-e2d5-4764-9bf9-e13916dcc528",
@@ -248,12 +272,6 @@
               "name": "TEXT_PROMPT",
               "type": "string",
               "value": "={{ $json['0'].content[0].text }}"
-            },
-            {
-              "id": "bf0910e1-b757-4852-9341-a7792161f89b",
-              "name": "ACCESS_TOKEN",
-              "type": "string",
-              "value": "ya29.a0Aa7pCA9Usf7M5PYDxvo4f0-yJwuU0O2yci9Ypa1sgc6p9QDlo1G8XTmOt2Tz-rqlyWSi35E5KNDO9fOBm5n_rt-wp_HWwxTg6D7MnuRf4uSaC0p_ZtSWynCrehROk9d9UavIWc5IGBl0RXd-J47P1teRuRFkkKzhbuePtjkPknwQS2U5P0ssz3RI_TYk1d-soFaMVeseaCgYKAXkSARcSFQHGX2MiAVtlRwP6BMqY5ofe_VKNgQ0207"
             },
             {
               "id": "17954335-b96b-4813-9c4a-20817d675448",
@@ -304,24 +322,6 @@
               "value": true
             },
             {
-              "id": "client-id",
-              "name": "CLIENT_ID",
-              "type": "string",
-              "value": "823311730572-tbm9sjtf8sonll98v011o8o30aqebkti.apps.googleusercontent.com"
-            },
-            {
-              "id": "client-secret",
-              "name": "CLIENT_SECRET",
-              "type": "string",
-              "value": "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"
-            },
-            {
-              "id": "refresh-token",
-              "name": "REFRESH_TOKEN",
-              "type": "string",
-              "value": "1//04plJd9BIqvF_CgYIARAAGAQSNwF-L9Ir40JaQ02eJLCwRKgS-SJP0GauDZ10HxmmpOunYj4TKtEEOwIwgSxvCn5fVfEOn-1ki0o"
-            },
-            {
               "id": "row-data",
               "name": "ROW_DATA",
               "type": "array",
@@ -331,12 +331,12 @@
         },
         "options": {}
       },
-      "id": "8b2be50e-280f-4202-989b-8e8128666900",
+      "id": "7a0ef6d8-a6d5-4d53-8d8d-0a2c798585e9",
       "name": "Setting2",
       "type": "n8n-nodes-base.set",
       "position": [
-        1120,
-        0
+        1312,
+        416
       ],
       "typeVersion": 3.4
     },
@@ -351,10 +351,10 @@
       "type": "n8n-nodes-base.scheduleTrigger",
       "typeVersion": 1.3,
       "position": [
-        0,
-        0
+        192,
+        416
       ],
-      "id": "261cc34a-7475-4abc-9b87-c817825e67fd",
+      "id": "98fa079d-c37f-47e1-b3e5-9fb663eee8c6",
       "name": "Schedule Trigger2"
     },
     {
@@ -367,10 +367,10 @@
       "type": "n8n-nodes-base.stickyNote",
       "typeVersion": 1,
       "position": [
-        -144,
-        -352
+        48,
+        64
       ],
-      "id": "03876e91-38e9-4357-9ba5-4ec1ba8e8ec9",
+      "id": "be5e69cb-c5b4-410a-bf02-d39e6cf34288",
       "name": "Sticky Note2"
     },
     {
@@ -380,10 +380,10 @@
         "filter": {
           "folderId": {
             "__rl": true,
-            "value": "1fbEftm6Ic64Lu4sz-4E2ULR_OUX714re",
+            "value": "YOUR_SOURCE_FOLDER_ID",
             "mode": "list",
-            "cachedResultName": "CREATE_VIDEO_IMAGES",
-            "cachedResultUrl": "https://drive.google.com/drive/folders/1fbEftm6Ic64Lu4sz-4E2ULR_OUX714re"
+            "cachedResultName": "06.Video_F_Image",
+            "cachedResultUrl": "https://drive.google.com/drive/folders/YOUR_SOURCE_FOLDER_ID"
           }
         },
         "options": {}
@@ -391,14 +391,14 @@
       "type": "n8n-nodes-base.googleDrive",
       "typeVersion": 3,
       "position": [
-        224,
-        0
+        416,
+        416
       ],
-      "id": "f6696adf-c3da-4e21-972c-6f052e52b625",
+      "id": "1dee81ea-b3fc-40e6-a383-232b120144dd",
       "name": "Search files and folders",
       "credentials": {
         "googleDriveOAuth2Api": {
-          "id": "e2osjsVHgsECOqGE",
+          "id": "YOUR_GOOGLE_DRIVE_CREDENTIAL_ID",
           "name": "Google Drive account 4"
         }
       }
@@ -416,14 +416,14 @@
       "type": "n8n-nodes-base.googleDrive",
       "typeVersion": 3,
       "position": [
-        672,
-        0
+        864,
+        416
       ],
-      "id": "d55c34e5-517d-4e24-b2c2-836c64fd4579",
+      "id": "9a07214b-4b70-4ba5-bd76-4daaa962a618",
       "name": "Download file",
       "credentials": {
         "googleDriveOAuth2Api": {
-          "id": "e2osjsVHgsECOqGE",
+          "id": "YOUR_GOOGLE_DRIVE_CREDENTIAL_ID",
           "name": "Google Drive account 4"
         }
       }
@@ -433,10 +433,10 @@
       "type": "n8n-nodes-base.limit",
       "typeVersion": 1,
       "position": [
-        448,
-        0
+        640,
+        416
       ],
-      "id": "434fa584-087c-4ed6-826d-a8cda3e5801a",
+      "id": "d3f8ef79-7609-465b-9e4b-6a1bda1edb9e",
       "name": "Limit3"
     },
     {
@@ -456,14 +456,14 @@
       "type": "@n8n/n8n-nodes-langchain.openAi",
       "typeVersion": 2,
       "position": [
-        896,
-        0
+        1088,
+        416
       ],
-      "id": "2c67ba83-d14c-4d5c-92d1-db1a3628a0fb",
+      "id": "217b1ae4-e110-4b6d-85bd-38daa4d1e190",
       "name": "Analyze image",
       "credentials": {
         "openAiApi": {
-          "id": "O00uQUVJ3Z2xrDsL",
+          "id": "YOUR_OPENAI_CREDENTIAL_ID",
           "name": "OpenAi account 7"
         }
       }
@@ -483,23 +483,23 @@
         },
         "folderId": {
           "__rl": true,
-          "value": "1qvFU3qRuQBvn6AdZcR3pPK_NS8HRPjeL",
+          "value": "YOUR_MOVE_FOLDER_ID",
           "mode": "list",
-          "cachedResultName": "Done_Create_video",
-          "cachedResultUrl": "https://drive.google.com/drive/folders/1qvFU3qRuQBvn6AdZcR3pPK_NS8HRPjeL"
+          "cachedResultName": "06.Image_Move",
+          "cachedResultUrl": "https://drive.google.com/drive/folders/YOUR_MOVE_FOLDER_ID"
         }
       },
       "type": "n8n-nodes-base.googleDrive",
       "typeVersion": 3,
       "position": [
-        3136,
-        0
+        3328,
+        416
       ],
-      "id": "04719802-6c37-436c-a93c-af71576a7f72",
+      "id": "b167b8f4-d6ae-4348-8ca6-01dc7d8ac6a8",
       "name": "Move file",
       "credentials": {
         "googleDriveOAuth2Api": {
-          "id": "e2osjsVHgsECOqGE",
+          "id": "YOUR_GOOGLE_DRIVE_CREDENTIAL_ID",
           "name": "Google Drive account 4"
         }
       }
@@ -680,10 +680,10 @@
   "settings": {
     "executionOrder": "v1"
   },
-  "versionId": "2cda2079-5106-40ec-964c-ed6dae77f45e",
+  "versionId": "162c0d76-2eb7-40b2-b880-1ccd0c2317f9",
   "meta": {
     "instanceId": "8ae9064574590f4bef62fe6c8cafaae52a5a90dd40cb184103af1049753a2d5d"
   },
-  "id": "GsqUR1YUer6KGPo6",
+  "id": "6LBtO90IJ5WWQQz0",
   "tags": []
 }
